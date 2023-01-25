@@ -1,1 +1,12 @@
 Files used for testing on UEA HPC - Initially copied from ARCHER
+
+Updated to match those used for P1.5b (rather than 0.9). 
+
+Further information is available here: 
+https://github.com/JMMP-Group/CO_AMM15/wiki/Key_CO9_Experiments#p1x-experiments
+
+
+Aim to match the following Rose suite (from Met Office repository):
+https://code.metoffice.gov.uk/svn/roses-u/c/s/3/1/7/ 
+
+
