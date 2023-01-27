@@ -1,9 +1,8 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
-!  copied from
-! from https://code.metoffice.gov.uk/svn/roses-u/c/d/6/1/1/trunk/app/nemo_cice/rose-app.conf
-! P0.9b CO9 AMM15 NEMO 404 ERA5+update GLS options + Atlantic 3D UV specified,Tra specified,LN_FULL_TRUE +FES2014 (u-cd513) Done
-! which is actually tpx tide not fes tide
+!  based on:
+! https://code.metoffice.gov.uk/svn/roses-u/c/s/3/1/7/trunk/app/nemo_cice/rose-app.conf
+! P1.5b CO9 AMM15 NEMO 404 
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 &namrun
@@ -43,11 +42,11 @@ nn_baro=30,
 &namcrs
 /
 &namtsd
-cn_dir='data/RESTART/',
+cn_dir='NEMO_INIT',
 ln_tsd_dmp=.false.,
-ln_tsd_init=.false.,
-sn_sal='restart_based_on_AMM15NOWAD_TOAMM15_WAD_NB_BALTIC_20131230.nc',-1,'sn',.false.,.true.,'yearly',' ',' ',
-sn_tem='restart_based_on_AMM15NOWAD_TOAMM15_WAD_NB_BALTIC_20131230.nc',-1,'tn',.false.,.true.,'yearly',' ',' ',
+ln_tsd_init=.true.,
+sn_sal='co8_20040101_restart_S_interp_TO_GEG_NICO_BALTIC_BLOCK_10M_MIN_RIV.nc',-1,'sn',.false.,.true.,'yearly',' ',' ',
+sn_tem='co8_20040101_restart_T_interp_TO_GEG_NICO_BALTIC_BLOCK_10M_MIN_RIV.nc',-1,'tn',.false.,.true.,'yearly',' ',' ',
 /
 &namsbc
 ln_apr_dyn=.true.
@@ -154,9 +153,9 @@ ln_rnf_tem=.false.,
 rn_avt_rnf=1000.0,
 rn_hrnf=10.0,
 rn_rfact=1.0,
-sn_cnf='rivers',24,'socoefr0',.false.,.true.,'yearly','','',
-sn_dep_rnf='rivers',24,'rodepth',.false.,.true.,'yearly','','',
-sn_rnf='rivers',24,'rorunoff',.false.,.true.,'yearly','','',
+sn_cnf='rivers',24,'socoefr0',.false.,.false.,'yearly','','',
+sn_dep_rnf='rivers',24,'rodepth',.false.,.false.,'yearly','','',
+sn_rnf='rivers',24,'rorunoff',.false.,.false.,'yearly','','',
 /
 &namsbc_apr
 cn_dir= '/work/n01/n01/shared/CO_AMM15/INPUTS/forcing/era5/'
@@ -188,32 +187,58 @@ rn_sponge_dyn=2880.0,
 rn_sponge_tra=2880.0,
 /
 &nam_tide
-clname(1)='M2',
-clname(2)='S2',
-clname(3)='N2',
-clname(4)='K2',
-clname(5)='K1',
-clname(6)='O1',
-clname(7)='P1',
-clname(8)='Q1',
-clname(9)='M4',
-clname(10)='MS4',
-clname(11)='MN4',
-ln_tide=.true.,
+clname(1)='SA',
+clname(2)='SSA',
+clname(3)='MM',
+clname(4)='MF',
+clname(5)='MTM',
+clname(6)='MSF',
+clname(7)='MSQM',
+clname(8)='K1',
+clname(9)='O1',
+clname(10)='Q1',
+clname(11)='P1',
+clname(12)='S1',
+clname(13)='J1',
+clname(14)='M2',
+clname(15)='N2',
+clname(16)='S2',
+clname(17)='K2',
+clname(18)='L2',
+clname(19)='T2',
+clname(20)='R2',
+clname(21)='MU2',
+clname(22)='NU2',
+clname(23)='2N2',
+clname(24)='MKS2',
+clname(25)='LA2',
+clname(26)='EPS2',
+clname(27)='M3',
+clname(28)='M4',
+clname(29)='M6',
+clname(30)='M8',
+clname(31)='N4',
+clname(32)='S4',
+clname(33)='MN4',
+clname(34)='MS4',
 ln_tide_pot=.true.,
+ln_tide= .true.,
+dn_love_number=0.69,
+ln_tide_ramp  = .false., 
+rdttideramp   =    1.,
 /
 &nambdy
 ln_bdy= .true.
 cn_coords_file='coordinates.bdy.nc','coordinates.skagbdy.nc'
 cn_dyn2d='flather','flather'
-cn_dyn3d= 'specified','specified'
+cn_dyn3d= 'none','specified'
 cn_tra= 'frs','specified'
 ln_coords_file=.true.,.true.
 ln_mask_file=.false.
 !!ln_sponge=.true.
 nb_bdy=2
 nn_dyn2d_dta=3,1
-nn_dyn3d_dta=1,1
+nn_dyn3d_dta=0,1
 nn_rimwidth=15,9
 nn_tra_dta=1,1
 /
@@ -225,19 +250,19 @@ bn_u2d='amm15_bt_bdyU',24,'vobtcrtx',.true.,.false.,'daily','','',''
 bn_u3d='amm15_bdyU',24,'vozocrtx',.true.,.false.,'daily','','',''
 bn_v2d='amm15_bt_bdyV',24,'vobtcrty',.true.,.false.,'daily','','',''
 bn_v3d='amm15_bdyV',24,'vomecrty',.true.,.false.,'daily','','',''
-!bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-!bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-!bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-!bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 cn_dir='/work/n01/n01/shared/CO_AMM15/INPUTS/bdy/atlantic/'
-ln_full_vel=.true.
-ln_zinterp=.false.
+ln_full_vel=.false.
+ln_zinterp=.true.
 /
 &nambdy_dta
-!bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-!bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-!bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-!bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 ln_zinterp=.true.
 ln_full_vel=.true.
 cn_dir='/work/n01/n01/shared/CO_AMM15/INPUTS/bdy/baltic/'
@@ -250,7 +275,7 @@ bn_u3d      =  'amm15baltic_bdyU'     ,         24        , 'vozocrtx',    .true
 bn_v3d      =  'amm15baltic_bdyV'     ,         24        , 'vomecrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   '' 
 /
 &nambdy_tide
-filtide='/work/n01/n01/shared/CO_AMM15/OTHER_INPUTS/tides/tpxo/amm15_bdytide_tp'
+filtide='bdydta/bdry_tide_34csts_AMM15'
 ln_bdytide_2ddta=.true.
 ln_bdytide_conj=.false.
 /
@@ -408,7 +433,6 @@ ln_nnogather=.false.,
 /
 &namctl
 ln_ctl=.false.,
-!ln_timing=.true.,
 nn_ictle=0,
 nn_ictls=0,
 nn_isplt=1,
@@ -499,7 +523,7 @@ ln_vvl_layer=.false.,
 ln_vvl_zstar=.true.,
 /
 &nam_diatmb
-ln_diatmb=.false.
+ln_diatmb=.true.
 /
 &nam_dia25h
 ln_dia25h=.true.,
@@ -533,17 +557,17 @@ rn_z0=0.003,
 &namdrg_top
 /
 &namwad
-ln_wd_dl=.false.,
-ln_wd_dl_bc=.false.,
-ln_wd_dl_rmp=.false.,
+ln_wd_dl=.true.,
+ln_wd_dl_bc=.true.,
+ln_wd_dl_rmp=.true.,
 ln_wd_il=.false.,
 nn_wdit=200,
 rn_wd_sbcdep=30.0,
-rn_wd_sbcfra=0.999,
+rn_wd_sbcfra=0.99,
 rn_wdld=0.0,
-rn_wdmin0=0.9,
-rn_wdmin1=0.2,
-rn_wdmin2=0.1,
+rn_wdmin0=10.0,
+rn_wdmin1=0.1,
+rn_wdmin2=1.0,
 /
 &nambdy_ssh
 ln_ssh_bdy=.true.,.true.
