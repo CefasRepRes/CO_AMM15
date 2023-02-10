@@ -14,7 +14,7 @@ cn_ocerst_outdir='RESTART/',
 ln_clobber=.true.,
 ln_mskland=.true.,
 ln_rst_eos=.false.,
-ln_rstart=.true.,
+ln_rstart=.false.,
 ln_rstdate=.true.,
 nn_date0=20040101,
 nn_euler=1,
@@ -26,7 +26,7 @@ nn_stock=144000,
 nn_write=144000,
 /
 &namcfg
-cn_domcfg = '/work/n01/n01/shared/CO_AMM15/INPUTS/domains/CO7_EXACT_CFG_FILE'
+cn_domcfg = '/gpfs/data/cefas-shared/NEMO/jmmp_collab/AMM15/DOMAIN_CFG/GEG_SF12.nc'
 ln_read_cfg=.true.,
 /
 &namdom
@@ -42,11 +42,11 @@ nn_baro=30,
 &namcrs
 /
 &namtsd
-cn_dir='NEMO_INIT',
+cn_dir='/gpfs/data/cefas-shared/NEMO/jmmp_collab/AMM15/RESTARTS/P15b/',
 ln_tsd_dmp=.false.,
 ln_tsd_init=.true.,
-sn_sal='co8_20040101_restart_S_interp_TO_GEG_NICO_BALTIC_BLOCK_10M_MIN_RIV.nc',-1,'sn',.false.,.true.,'yearly',' ',' ',
-sn_tem='co8_20040101_restart_T_interp_TO_GEG_NICO_BALTIC_BLOCK_10M_MIN_RIV.nc',-1,'tn',.false.,.true.,'yearly',' ',' ',
+sn_sal='ini_GEG_NICOBALS.nc',-1,'sn',.false.,.true.,'yearly',' ',' ',
+sn_tem='ini_GEG_NICOBALT.nc',-1,'tn',.false.,.true.,'yearly',' ',' ',
 /
 &namsbc
 ln_apr_dyn=.true.
@@ -84,7 +84,7 @@ sn_vtau='tauy_1m',-1,'sometauy',.true.,.true.,'yearly','','','',
 sn_wndm='flx',-1,'socliowi',.true.,.true.,'yearly','','','',
 /
 &namsbc_blk
-cn_dir='/work/n01/n01/shared/CO_AMM15/INPUTS/forcing/era5/',
+cn_dir='./FORCING/SBC/ERA5/',
 ln_NCAR     = .false.   ! "NCAR"      algorithm   (Large and Yeager 2008)
 ln_COARE_3p0= .false.   ! "COARE 3.0" algorithm   (Fairall et al. 2003)
 ln_COARE_3p5= .false.   ! "COARE 3.5" algorithm   (Edson et al. 2013)
@@ -96,15 +96,17 @@ rn_pfac     = 1.        !  multiplicative factor for precipitation (total & snow
 rn_efac     = 1.        !  multiplicative factor for evaporation (0. or 1.)
 rn_vfac     = 0.        !  multiplicative factor for ocean/ice velocity
 ln_Cd_L12   = .false.   !  Modify the drag ice-atm and oce-atm depending on ice concentration
-sn_humi     = 'ERA5_SPH'  ,    1      ,   'SPH'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
-sn_prec     = 'ERA5_MTPR'   ,    1    ,   'MTPR'    ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
-sn_qlw      = 'ERA5_MSDWLWRF' ,    1  ,   'MSDWLWRF'  ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
-sn_qsr      = 'ERA5_MSDWSWRF' ,    1  ,   'MSDWSWRF'  ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
-sn_snow     = 'ERA5_MSR'   ,    1      ,   'MSR'    ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
-sn_tair     = 'ERA5_T2M'  ,    1      ,   'T2M'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
-sn_wndi     = 'ERA5_U10'  ,    1      ,   'U10'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',  'Uwnd'  ,  'ERA5_LSM'
-sn_wndj     = 'ERA5_V10'  ,    1      ,   'V10'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',  'Vwnd'  ,  'ERA5_LSM'
-sn_slp      = 'ERA5_MSL'  ,    1      ,   'MSL'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_humi     = 'INPUTS/forcing/era5/ERA5_SPH'  ,    1      ,   'SPH'   ,    .true.   , .false.,  'yearly' ,
+'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_prec     = 'INPUTS/forcing/era5/ERA5_MTPR'   ,    1    ,   'MTPR'    ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_qlw      = 'INPUTS/forcing/era5/ERA5_MSDWLWRF' ,    1  ,   'MSDWLWRF'  ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_qsr      = 'INPUTS/forcing/era5/ERA5_MSDWSWRF' ,    1  ,   'MSDWSWRF'  ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_snow     = 'INPUTS/forcing/era5/ERA5_MSR'   ,    1      ,   'MSR'    ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_tair     = 'INPUTS/forcing/era5/ERA5_T2M'  ,    1      ,   'T2M'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
+sn_wndi     = 'INPUTS/forcing/era5/ERA5_U10'  ,    1      ,   'U10'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',  'Uwnd'  ,  'ERA5_LSM'
+sn_wndj     = 'INPUTS/forcing/era5/ERA5_V10'  ,    1      ,   'V10'   ,    .true.   , .false.,  'yearly' ,'weights_era5_bicubic.nc',  'Vwnd'  ,  'ERA5_LSM'
+sn_slp      = 'INPUTS/forcing/era5/ERA5_MSL'  ,    1      ,   'MSL'   ,    .true.   , .false.,  'yearly' ,
+'weights_era5_bicubic.nc',    ''    ,  'ERA5_LSM'
 sn_cc       = 'NOT USED'  ,   24.     , 'CC'      ,   .false.   , .true. , 'yearly'  ,'weights_era5_bicubic.nc' , ''       , ''
 /
 &namsbc_mfs
@@ -158,11 +160,12 @@ sn_dep_rnf='rivers',24,'rodepth',.false.,.false.,'yearly','','',
 sn_rnf='rivers',24,'rorunoff',.false.,.false.,'yearly','','',
 /
 &namsbc_apr
-cn_dir= '/work/n01/n01/shared/CO_AMM15/INPUTS/forcing/era5/'
+cn_dir= 'FORCING/SBC/ERA5/'
 ln_apr_obc=.true.
 ln_ref_apr=.false.
 rn_pref=101000.0
-sn_apr      = 'ERA5_MSL'              ,          1        ,    'MSL'  ,    .true.   , .false., 'yearly'  ,'weights_era5_bicubic.nc','','ERA5_LSM'
+sn_apr      = 'INPUTS/forcing/era5/ERA5_MSL'              ,          1        ,    'MSL'  ,    .true.   , .false., 'yearly'  ,
+'weights_era5_bicubic.nc','','ERA5_LSM'
 /
 &namsbc_ssr
 nn_sssr=0,
@@ -229,7 +232,7 @@ rdttideramp   =    1.,
 /
 &nambdy
 ln_bdy= .true.
-cn_coords_file='coordinates.bdy.nc','coordinates.skagbdy.nc'
+cn_coords_file='amm15.bdy.coordinates.rim15.nc','CO9_rimwidth_9_coordinates.bdy_baltic.nc'
 cn_dyn2d='flather','flather'
 cn_dyn3d= 'none','specified'
 cn_tra= 'frs','specified'
@@ -243,18 +246,18 @@ nn_rimwidth=15,9
 nn_tra_dta=1,1
 /
 &nambdy_dta
-bn_sal='amm15_bdyT',24,'vosaline',.true.,.false.,'daily','','',''
-bn_ssh='amm15_bt_bdyT',24,'sossheig',.true.,.false.,'daily','','',''
-bn_tem='amm15_bdyT',24,'votemper',.true.,.false.,'daily','','',''
-bn_u2d='amm15_bt_bdyU',24,'vobtcrtx',.true.,.false.,'daily','','',''
-bn_u3d='amm15_bdyU',24,'vozocrtx',.true.,.false.,'daily','','',''
-bn_v2d='amm15_bt_bdyV',24,'vobtcrty',.true.,.false.,'daily','','',''
-bn_v3d='amm15_bdyV',24,'vomecrty',.true.,.false.,'daily','','',''
+bn_sal='EXPER_NO_VERT_BDY_SJPZ_A_AND_D/2004/amm15_bdyT',24,'vosaline',.true.,.false.,'daily','','',''
+bn_ssh='SJPZ_A_AND_D_BT/2004/amm15_bt_bdyT',24,'sossheig',.true.,.false.,'daily','','',''
+bn_tem='EXPER_NO_VERT_BDY_SJPZ_A_AND_D/2004/amm15_bdyT',24,'votemper',.true.,.false.,'daily','','',''
+bn_u2d='SJPZ_A_AND_D_BT/2004/amm15_bt_bdyU',24,'vobtcrtx',.true.,.false.,'daily','','',''
+bn_u3d='EXPER_NO_VERT_BDY_SJPZ_A_AND_D/2004/amm15_bdyU',24,'vozocrtx',.true.,.false.,'daily','','',''
+bn_v2d='SJPZ_A_AND_D_BT/2004/amm15_bt_bdyV',24,'vobtcrty',.true.,.false.,'daily','','',''
+bn_v3d='EXPER_NO_VERT_BDY_SJPZ_A_AND_D/2004/amm15_bdyV',24,'vomecrty',.true.,.false.,'daily','','',''
 bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-cn_dir='/work/n01/n01/shared/CO_AMM15/INPUTS/bdy/atlantic/'
+cn_dir='FORCING/BDY/'
 ln_full_vel=.false.
 ln_zinterp=.true.
 /
@@ -265,17 +268,17 @@ bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false
 bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 ln_zinterp=.true.
 ln_full_vel=.true.
-cn_dir='/work/n01/n01/shared/CO_AMM15/INPUTS/bdy/baltic/'
-bn_ssh      =  'amm15baltic_bt_bdyT'  ,         24        , 'sossheig',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
-bn_u2d      =  'amm15baltic_bt_bdyU'  ,         24        , 'vobtcrtx',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
-bn_v2d      =  'amm15baltic_bt_bdyV'  ,         24        , 'vobtcrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
-bn_sal      =  'amm15baltic_bdyT'     ,         24        , 'vosaline',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
-bn_tem      =  'amm15baltic_bdyT'     ,         24        , 'votemper',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
-bn_u3d      =  'amm15baltic_bdyU'     ,         24        , 'vozocrtx',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
-bn_v3d      =  'amm15baltic_bdyV'     ,         24        , 'vomecrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   '' 
+cn_dir='FORCING/BDY/'
+bn_ssh      =  'BALTIC/amm15baltic_bt_bdyT'  ,         24        , 'sossheig',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
+bn_u2d      =  'BALTIC/amm15baltic_bt_bdyU'  ,         24        , 'vobtcrtx',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
+bn_v2d      =  'BALTIC/amm15baltic_bt_bdyV'  ,         24        , 'vobtcrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
+bn_sal      =  'amm15_Baltic/amm15baltic_bdyT'     ,         24        , 'vosaline',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
+bn_tem      =  'amm15_Baltic/amm15baltic_bdyT'     ,         24        , 'votemper',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
+bn_u3d      =  'amm15_Baltic/amm15baltic_bdyU'     ,         24        , 'vozocrtx',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
+bn_v3d      =  'amm15_Baltic/amm15baltic_bdyV'     ,         24        , 'vomecrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   '' 
 /
 &nambdy_tide
-filtide='bdydta/bdry_tide_34csts_AMM15'
+filtide='./FORCING/TIDES/FES2014/bdry_tide_34csts_AMM15'
 ln_bdytide_2ddta=.true.
 ln_bdytide_conj=.false.
 /
@@ -426,8 +429,8 @@ rn_resmax=1.0e-10,
 rn_sor=1.92,
 /
 &nammpp
-jpni=47,
-jpnj=24,
+jpni=14,
+jpnj=7,
 ln_listonly=.false.,
 ln_nnogather=.false.,
 /
