@@ -26,7 +26,7 @@ nn_stock=144000,
 nn_write=144000,
 /
 &namcfg
-cn_domcfg = '/gpfs/data/cefas-shared/NEMO/jmmp_collab/AMM15/DOMAIN_CFG/GEG_SF12.nc'
+cn_domcfg = '/gpfs/data/cefas-shared/NEMO/jmmp/AMM15/DOMAIN_CFG/GEG_SF12.nc'
 ln_read_cfg=.true.,
 /
 &namdom
@@ -42,7 +42,7 @@ nn_baro=30,
 &namcrs
 /
 &namtsd
-cn_dir='/gpfs/data/cefas-shared/NEMO/jmmp_collab/AMM15/RESTARTS/P15b/',
+cn_dir='/gpfs/data/cefas-shared/NEMO/jmmp/AMM15/RESTARTS/P15b/',
 ln_tsd_dmp=.false.,
 ln_tsd_init=.true.,
 sn_sal='ini_GEG_NICOBALS.nc',-1,'sn',.false.,.true.,'yearly',' ',' ',
