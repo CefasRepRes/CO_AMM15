@@ -20,13 +20,13 @@ nn_date0=20040101,
 nn_euler=1,
 nn_istate=0,
 nn_it000=1,
-nn_itend=10800,
+nn_itend=1080,
 nn_leapy=1,
 nn_stock=144000,
 nn_write=144000,
 /
 &namcfg
-cn_domcfg = '/gpfs/data/cefas-shared/NEMO/jmmp/AMM15/DOMAIN_CFG/GEG_SF12.nc'
+cn_domcfg = 'GEG_SF12.nc'
 ln_read_cfg=.true.,
 /
 &namdom
@@ -42,7 +42,7 @@ nn_baro=30,
 &namcrs
 /
 &namtsd
-cn_dir='/gpfs/data/cefas-shared/NEMO/jmmp/AMM15/RESTARTS/P15b/',
+cn_dir='./',
 ln_tsd_dmp=.false.,
 ln_tsd_init=.true.,
 sn_sal='ini_GEG_NICOBALS.nc',-1,'sn',.false.,.true.,'yearly',' ',' ',
@@ -84,7 +84,7 @@ sn_vtau='tauy_1m',-1,'sometauy',.true.,.true.,'yearly','','','',
 sn_wndm='flx',-1,'socliowi',.true.,.true.,'yearly','','','',
 /
 &namsbc_blk
-cn_dir='./FORCING/SBC/ERA5/',
+cn_dir='./SBC/ERA5/',
 ln_NCAR     = .false.   ! "NCAR"      algorithm   (Large and Yeager 2008)
 ln_COARE_3p0= .false.   ! "COARE 3.0" algorithm   (Fairall et al. 2003)
 ln_COARE_3p5= .false.   ! "COARE 3.5" algorithm   (Edson et al. 2013)
@@ -147,7 +147,7 @@ rn_si0=0.35,
 sn_chl='chlorophyll',-1,'CHLA',.true.,.true.,'yearly','','',
 /
 &namsbc_rnf
-cn_dir='./',
+cn_dir='./RIV/',
 ln_rnf_depth=.true.,
 ln_rnf_mouth=.false.,
 ln_rnf_sal=.false.,
@@ -155,12 +155,13 @@ ln_rnf_tem=.false.,
 rn_avt_rnf=1000.0,
 rn_hrnf=10.0,
 rn_rfact=1.0,
-sn_cnf='rivers',24,'socoefr0',.false.,.false.,'yearly','','',
-sn_dep_rnf='rivers',24,'rodepth',.false.,.false.,'yearly','','',
-sn_rnf='rivers',24,'rorunoff',.false.,.false.,'yearly','','',
+sn_cnf='rivers',0,'socoefr0',.false.,.true.,'yearly','','',
+sn_dep_rnf='Spread_Loirre_Garron_N_G',0,'rodepth',.false.,.true.,'yearly','','',
+sn_rnf='Spread_Loirre_Garron_N_G',24,'rorunoff',.true.,.true.,'yearly','','',
+
 /
 &namsbc_apr
-cn_dir= 'FORCING/SBC/ERA5/'
+cn_dir= './SBC/ERA5/'
 ln_apr_obc=.true.
 ln_ref_apr=.false.
 rn_pref=101000.0
@@ -257,7 +258,7 @@ bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false
 bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-cn_dir='FORCING/BDY/'
+cn_dir='./BDY/'
 ln_full_vel=.false.
 ln_zinterp=.true.
 /
@@ -268,7 +269,7 @@ bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false
 bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
 ln_zinterp=.true.
 ln_full_vel=.true.
-cn_dir='FORCING/BDY/'
+cn_dir='./BDY/'
 bn_ssh      =  'BALTIC/amm15baltic_bt_bdyT'  ,         24        , 'sossheig',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
 bn_u2d      =  'BALTIC/amm15baltic_bt_bdyU'  ,         24        , 'vobtcrtx',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
 bn_v2d      =  'BALTIC/amm15baltic_bt_bdyV'  ,         24        , 'vobtcrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   ''      ,
@@ -278,7 +279,7 @@ bn_u3d      =  'amm15_Baltic/amm15baltic_bdyU'     ,         24        , 'vozocr
 bn_v3d      =  'amm15_Baltic/amm15baltic_bdyV'     ,         24        , 'vomecrty',    .true.   , .false. , 'yearly' ,     ''    ,   ''     ,   '' 
 /
 &nambdy_tide
-filtide='./FORCING/TIDES/FES2014/bdry_tide_34csts_AMM15'
+filtide='./TIDES/FES2014/bdry_tide_34csts_AMM15'
 ln_bdytide_2ddta=.true.
 ln_bdytide_conj=.false.
 /
