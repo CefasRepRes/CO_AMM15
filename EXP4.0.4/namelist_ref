@@ -66,7 +66,7 @@
    nn_chunksz  =       0   !  chunksize (bytes) for NetCDF file (works only with iom_nf90 routines)
    ln_xios_read = .FALSE.  !  use XIOS to read restart file (only for a single file restart)
    nn_wxios = 0      !  use XIOS to write restart file 0 - no, 1 - single file output, 2 - multiple file output
-   ln_rst_eos = .TRUE.     ! check if the equation of state used to produce the restart is consistent with model
+!   ln_rst_eos = .TRUE.     ! check if the equation of state used to produce the restart is consistent with model
 /
 !-----------------------------------------------------------------------
 &namdom        !   time and space domain
@@ -647,14 +647,14 @@
    ! melt ponds (be careful, bn_aip is the pond concentration (not fraction), so it differs from rn_iceapnd)
    bn_aip      = 'NOT USED'              ,         24.       , 'siapnd'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
    bn_hip      = 'NOT USED'              ,         24.       , 'sihpnd'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
-   bn_hil      = 'NOT USED'              ,         24.       , 'sihlid'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+!   bn_hil      = 'NOT USED'              ,         24.       , 'sihlid'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
    ! if bn_t_i etc are "not used", then define arbitrary temperatures and salinity and ponds
    rn_ice_tem  = 270.         !  arbitrary temperature               of incoming sea ice
    rn_ice_sal  = 10.          !       --   salinity                            --
    rn_ice_age  = 30.          !       --   age                                 --
    rn_ice_apnd = 0.2          !       --   pond fraction = a_ip/a_i            --
    rn_ice_hpnd = 0.05         !       --   pond depth                          --
-   rn_ice_hlid = 0.0          !       --   pond lid depth                      --
+!   rn_ice_hlid = 0.0          !       --   pond lid depth                      --
 /
 !-----------------------------------------------------------------------
 &nambdy_tide   !  tidal forcing at open boundaries                      (default: OFF)
@@ -1093,11 +1093,11 @@
    rn_crban      = 100.    !  Craig and Banner 1994 constant for wb tke flux
    rn_charn      = 70000.  !  Charnock constant for wb induced roughness length
    rn_hsro       =  0.02   !  Minimum surface roughness
-   rn_hsri       =  0.03   !  Ice-ocean roughness
+!   rn_hsri       =  0.03   !  Ice-ocean roughness
    rn_frac_hs    =   1.3   !  Fraction of wave height as roughness (if nn_z0_met>1)
    nn_z0_met     =     2   !  Method for surface roughness computation (0/1/2/3)
    !                       !     = 3 requires ln_wave=T
-   nn_z0_ice     =   1     !  attenutaion of surface wave breaking under ice
+!   nn_z0_ice     =   1     !  attenutaion of surface wave breaking under ice
    !                       !           = 0 no impact of ice cover
    !                       !           = 1 roughness uses rn_hsri and is weigthed by 1-TANH(10*fr_i)
    !                       !           = 2 roughness uses rn_hsri and is weighted by 1-fr_i
