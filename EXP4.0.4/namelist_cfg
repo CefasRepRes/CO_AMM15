@@ -430,8 +430,8 @@ rn_resmax=1.0e-10,
 rn_sor=1.92,
 /
 &nammpp
-jpni=14,
-jpnj=7,
+jpni=0,
+jpnj=0,
 ln_listonly=.false.,
 ln_nnogather=.false.,
 /
@@ -444,6 +444,7 @@ nn_jctle=0,
 nn_jctls=0,
 nn_jsplt=1,
 nn_print=0,
+ln_timing=.true.
 /
 &namnc4
 ln_nc4zip=.true.,
