@@ -8,9 +8,9 @@
 &namrun
 cn_exp='co9',
 cn_ocerst_in='co8_20040101_restart',
-cn_ocerst_indir='/work/n01/n01/shared/CO_AMM15/OTHER_INPUTS/RESTART/'
+cn_ocerst_indir='./RESTARTS/'
 cn_ocerst_out='restart',
-cn_ocerst_outdir='RESTART/',
+cn_ocerst_outdir='./RESTARTS/',
 ln_clobber=.true.,
 ln_mskland=.true.,
 ln_rst_eos=.false.,
